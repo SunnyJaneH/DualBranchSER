@@ -82,6 +82,8 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 
 ### Per-Class Performance (DualBranchSER V2)
 
+![V2 Results](assets/v2_result.png)
+
 | Class | Precision | Recall | F1 |
 |---|---|---|---|
 | Angry | 0.67 | 0.65 | 0.66 |
