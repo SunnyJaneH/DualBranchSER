@@ -1,7 +1,7 @@
 # DualBranchSER — Speech Emotion Recognition
 
 > **Team Course Project** — SJSU DATA 255 Deep Learning · Group 2 · April 2026  
-> **My Contribution:** Model optimization, Focal Loss implementation, data augmentation, and multi-utterance Dialogue Context module with InstanceNorm2d speaker normalization.
+> Full team: Anshika Goel · Abhinita Sanabada · Arya Mehta · Jane Heng
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
 ![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white)
@@ -19,8 +19,8 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 |---|---|---|---|
 | MFCC + MLP (Baseline) | 40.1% | 38.6% | 0.00013 |
 | Transformer / wav2vec (Baseline) | 45.5% | 43.7% | 0.00005 |
-| **DualBranchSER (Ours)** | **55.9%** | **52.4%** | **0.00008** |
-| DualBranchSER-v3 (Ours) | 54.5% | 50.5% | 0.00008 |
+| **DualBranchSER V2 (Ours)** | **55.9%** | **52.4%** | **0.00008** |
+| DualBranchSER V3 (Ours) | 54.5% | 50.5% | 0.00008 |
 
 **+15.8% accuracy over MFCC+MLP baseline · Real-time capable (RTF=0.00008)**
 
@@ -28,10 +28,10 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 
 ## System Architecture
 
-### DualBranchSER (V2 — Best Model)
+### DualBranchSER V2 — Best Model
 ![Architecture V2](assets/architecture_v2.png)
 
-### DualBranchSER-v3 (Extended)
+### DualBranchSER V3 — Extended with Speaker Normalization
 ![Architecture V3](assets/architecture_v3.png)
 
 ---
@@ -64,8 +64,34 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 | CNNs treat audio as static image | Bi-LSTM + Attention models temporal dynamics |
 | No conversational context | Dialogue Context module (prev 2-3 utterances) |
 | Class imbalance (neutral ignored) | Focal Loss + class weights → neutral F1: 0.00→0.38 |
-| Speaker variability | InstanceNorm2d removes speaker-specific tone (v3) |
+| Speaker variability | InstanceNorm2d removes speaker-specific tone (V3) |
 | SOTA models too heavy | Lightweight design, RTF=0.00008, no pretraining |
+
+---
+
+## Results
+
+### Per-Class Performance (DualBranchSER V2)
+
+| Class | Precision | Recall | F1 |
+|---|---|---|---|
+| Angry | 0.67 | 0.65 | 0.66 |
+| Happy | 0.61 | 0.59 | 0.60 |
+| Sad | 0.48 | 0.42 | 0.45 |
+| Neutral | 0.36 | 0.41 | 0.38 |
+
+![V2 Results](assets/v2_result.png)
+
+---
+
+## Repository Structure
+
+| File | Description | Author |
+|---|---|---|
+| `DualBranchSER_v2.ipynb` | Model training & evaluation — V2 (best model, IEMOCAP only) | Jane Heng |
+| `DualBranchSER_v3.ipynb` | Model training & evaluation — V3 (IEMOCAP + MELD, speaker normalization) | Jane Heng |
+| `EDA_preprocessing.ipynb` | Exploratory data analysis, feature extraction & dataloader preparation | Abhinita Sanabada |
+| `assets/` | Architecture diagrams and result visualizations | — |
 
 ---
 
@@ -74,22 +100,10 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 | Dataset | Size | Classes | Use |
 |---|---|---|---|
 | IEMOCAP | 2,831 train / 354 val / 354 test | angry, happy, sad, neutral | Primary benchmark |
-| MELD | 10,494 samples | 4-class subset | v3 cross-domain experiment |
+| MELD | 10,494 samples | 4-class subset | V3 cross-domain experiment |
 
----
-
-## Results
-
-### Per-Class Performance (DualBranchSER V2)
-
-![V2 Results](assets/v2_result.png)
-
-| Class | Precision | Recall | F1 |
-|---|---|---|---|
-| Angry | 0.67 | 0.65 | 0.66 |
-| Happy | 0.61 | 0.59 | 0.60 |
-| Sad | 0.48 | 0.42 | 0.45 |
-| Neutral | 0.36 | 0.41 | 0.38 |
+- **IEMOCAP**: https://sail.usc.edu/iemocap/ (requires application)
+- **MELD**: https://github.com/declare-lab/MELD
 
 ---
 
@@ -106,19 +120,21 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 ## Setup
 
 ```bash
-pip install torch torchaudio librosa numpy pandas scikit-learn
+pip install torch torchaudio librosa numpy pandas scikit-learn matplotlib seaborn
 ```
+
+> Developed on Google Colab. Replace `BASE_ROOT` in the config cell with your local dataset path.
 
 ---
 
-## Team & Contributions
+## Team Contributions
 
-| Member | Role |
-|---|---|
-| Abhinita Sanabada | Data & Feature Engineering |
-| Arya Mehta | Core Branch Architecture |
-| Anshika Goel | Sequence Modeling & Fusion |
-| **Jane Heng** | **Optimization, Focal Loss, Data Augmentation, Dialogue Context Module** |
+| Member | Role | Notebooks |
+|---|---|---|
+| **Jane Heng** | Model optimization · Focal Loss · Data augmentation · Dialogue Context module · InstanceNorm2d | `DualBranchSER_v2.ipynb` · `DualBranchSER_v3.ipynb` |
+| Abhinita Sanabada | Data & Feature Engineering · Dataset scanning · Label coordination · Feature extraction | `EDA_preprocessing.ipynb` |
+| Arya Mehta | Core branch architecture · Dual-branch design · Spatial CNN · Temporal extraction | — |
+| Anshika Goel | Sequence modeling · Feature fusion · Bi-LSTM · Attention · Classification head | — |
 
 ---
 
