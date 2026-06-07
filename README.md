@@ -84,6 +84,11 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 
 ---
 
+### Continuous Emotion Tracking (DualBranchSER V2)
+![Emotion Timeline](assets/realtimedemo.png)
+
+> Real-time emotion tracking across a 43-utterance dialogue. The model correctly identifies happy/neutral transitions turn by turn with high confidence.
+
 ## Repository Structure
 
 | File | Description | Author |
