@@ -91,6 +91,8 @@ DualBranchSER is a lightweight dual-branch CNN + Bi-LSTM architecture for real-t
 | `DualBranchSER_v2.ipynb` | Model training & evaluation — V2 (best model, IEMOCAP only) | Jane Heng |
 | `DualBranchSER_v3.ipynb` | Model training & evaluation — V3 (IEMOCAP + MELD, speaker normalization) | Jane Heng |
 | `EDA_preprocessing.ipynb` | Exploratory data analysis, feature extraction & dataloader preparation | Abhinita Sanabada |
+| `Spatial_CNN.ipynb` | Spatial CNN + Temporal Dense Block (core feature extraction module) | Arya Mehta |
+| `emotion_detection_complete_model.ipynb` | Full data pipeline, training loop, MELD fine-tuning & inference | Anshika Goel |
 | `assets/` | Architecture diagrams and result visualizations | — |
 
 ---
@@ -131,10 +133,10 @@ pip install torch torchaudio librosa numpy pandas scikit-learn matplotlib seabor
 
 | Member | Role | Notebooks |
 |---|---|---|
-| **Jane Heng** | Model optimization · Focal Loss · Data augmentation · Dialogue Context module · InstanceNorm2d | `DualBranchSER_v2.ipynb` · `DualBranchSER_v3.ipynb` |
-| Abhinita Sanabada | Data & Feature Engineering · Dataset scanning · Label coordination · Feature extraction | `EDA_preprocessing.ipynb` |
-| Arya Mehta | Core branch architecture · Dual-branch design · Spatial CNN · Temporal extraction | — |
-| Anshika Goel | Sequence modeling · Feature fusion · Bi-LSTM · Attention · Classification head | — |
+| **Jane Heng** | Model optimization · Focal Loss · Data augmentation · Dialogue Context module · InstanceNorm2d · Training pipeline | `DualBranchSER_v2.ipynb` · `DualBranchSER_v3.ipynb` |
+| **Arya Mehta** | Spatial CNN architecture · Temporal Dense Block · Feature reshaping for Bi-LSTM input | `Spatial_CNN.ipynb` |
+| **Anshika Goel** | Data loading pipeline · DataLoader construction · Training loop · MELD fine-tuning · Evaluation & inference | `emotion_detection_complete_model.ipynb` |
+| **Abhinita Sanabada** | Exploratory data analysis · Feature extraction · Dataset scanning · Label coordination | `EDA_preprocessing.ipynb` |
 
 ---
 
